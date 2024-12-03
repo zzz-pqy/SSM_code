@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 被引用类bean声明 -->
+    <bean id="userDao" class="ioc_02.UserDao"/>
+
+    <!-- 引用类bean声明 -->
+    <bean id="userService" class="ioc_02.UserService">
+        <!-- 构造函数传递di的配置 -->
+        <constructor-arg ref="userDao"/>
+    </bean>
+
+    <!-- 场景1: 多参数，可以按照相应构造函数的顺序注入数据 -->
+    <beans>
+        <bean id="userService" class="ioc_02.UserService">
+            <!-- value直接注入基本类型值 -->
+            <constructor-arg  value="18"/>
+            <constructor-arg  value="赵伟风"/>
+
+            <constructor-arg  ref="userDao"/>
+        </bean>
+        <!-- 被引用类bean声明 -->
+        <bean id="userDao" class="ioc_02.UserDao"/>
+    </beans>
+
+
+    <!-- 场景2: 多参数，可以按照相应构造函数的名称注入数据 -->
+    <beans>
+        <bean id="userService" class="ioc_02.UserService">
+            <!-- value直接注入基本类型值 -->
+            <constructor-arg name="name" value="赵伟风"/>
+            <constructor-arg name="userDao" ref="userDao"/>
+            <constructor-arg name="age"  value="18"/>
+        </bean>
+        <!-- 被引用类bean声明 -->
+        <bean id="userDao" class="ioc_02.UserDao"/>
+    </beans>
+
+    <!-- 场景2: 多参数，可以按照相应构造函数的角标注入数据
+               index从0开始 构造函数(0,1,2....)
+    -->
+    <beans>
+        <bean id="userService" class="ioc_02.UserService">
+            <!-- value直接注入基本类型值 -->
+            <constructor-arg index="1" value="赵伟风"/>
+            <constructor-arg index="2" ref="userDao"/>
+            <constructor-arg index="0"  value="18"/>
+        </bean>
+        <!-- 被引用类bean声明 -->
+        <bean id="userDao" class="ioc_02.UserDao"/>
+    </beans>
+
+    <beans>
+        <bean id="movieFinder" class="ioc_02.MovieFinder"/>
+        <bean id="simpleMovieLister" class="ioc_02.SimpleMovieLister">
+            <!-- setter方法，注入movieFinder对象的标识id
+                 name = 属性名  ref = 引用bean的id值
+             -->
+            <property name="movieFinder" ref="movieFinder" />
+
+            <!-- setter方法，注入基本数据类型movieName
+                 name = 属性名 value= 基本类型值
+             -->
+            <property name="movieName" value="消失的她"/>
+        </bean>
+    </beans>
+
+<!--    - property标签： 可以给setter方法对应的属性赋值-->
+<!--    - property 标签： name属性代表**set方法标识**、ref代表引用bean的标识id、value属性代表基本属性值-->
+
+
+</beans>

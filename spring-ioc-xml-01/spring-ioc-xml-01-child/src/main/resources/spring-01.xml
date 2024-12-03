@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--   无参构造-->
+    <!--     - id属性：bean的唯一标识,方便后期获取Bean！-->
+    <!--    - class属性：组件类的全限定符！-->
+    <!--    注意：要求当前组件类必须包含无参数构造函数-->
+    <bean id="happyComponent" class="ioc_01.HappyComponent"/>
+
+    <!--    静态工厂构造-->
+    <!--    - class属性：指定工厂类的全限定符！-->
+    <!--    - factory-method: 指定静态工厂方法，注意，该方法必须是static方法。-->
+    <bean id="clientService" class="ioc_01.ClientService" factory-method="createInstance"/>
+
+
+    <!-- 将工厂类进行ioc配置 -->
+    <bean id="serviceLocator" class="ioc_01.DefaultServiceLocator"/>
+
+    <!-- 根据工厂对象的实例工厂方法进行实例化组件对象 -->
+    <bean id="clientService2" factory-bean="serviceLocator" factory-method="createClientServiceInstance"/>
+    <!--    - factory-bean属性：指定当前容器中工厂Bean 的名称。-->
+    <!--    - factory-method:  指定实例工厂方法名。注意，实例方法必须是非static的！-->
+
+
+</beans>
