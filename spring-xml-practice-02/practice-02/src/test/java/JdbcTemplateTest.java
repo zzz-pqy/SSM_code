@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -15,7 +16,7 @@ public class JdbcTemplateTest {
     public void testDML(){
 
         ApplicationContext applicationContext =
-                new ClassPathXmlApplicationContext("spring-ioc.xml");
+                new ClassPathXmlApplicationContext("practice.xml");
 
         JdbcTemplate jdbcTemplate = applicationContext.getBean(JdbcTemplate.class);
 
