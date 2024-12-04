@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- FactoryBean机制 -->
+    <!-- 这个bean标签中class属性指定的是HappyFactoryBean，但是将来从这里获取的bean是HappyMachine对象 -->
+    <bean id="happyMachine" class="ioc_05.HappyFactoryBean">
+        <!-- property标签仍然可以用来通过setXxx()方法给属性赋值 -->
+        <property name="machineName" value="iceCreamMachine"/>
+    </bean>
+
+</beans>

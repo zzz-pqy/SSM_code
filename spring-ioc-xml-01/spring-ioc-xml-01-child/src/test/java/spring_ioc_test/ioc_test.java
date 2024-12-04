@@ -3,6 +3,7 @@ package spring_ioc_test;
 import ioc_03.A;
 import ioc_03.HappyComponent;
 import ioc_04.BeanTwo;
+import ioc_05.HappyMachine;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.ApplicationContext;
@@ -74,6 +75,19 @@ public class ioc_test {
         System.out.println(bean2 == bean3);
     }
 
+    @Test
+    public void testExperiment07()  {
+
+        ApplicationContext iocContainer = new ClassPathXmlApplicationContext("spring-05.xml");
+
+        //注意: 直接根据声明FactoryBean的id,获取的是getObject方法返回的对象
+        HappyMachine happyMachine = iocContainer.getBean("happyMachine", HappyMachine.class);
+        System.out.println("happyMachine = " + happyMachine);
+
+        //如果想要获取FactoryBean对象, 直接在id前添加&符号即可!  &happyMachine7 这是一种固定的约束
+        Object bean = iocContainer.getBean("&happyMachine");
+        System.out.println("bean = " + bean);
+    }
 
 
 }
