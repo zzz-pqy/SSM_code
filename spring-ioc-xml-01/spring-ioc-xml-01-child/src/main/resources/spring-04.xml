@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--// init-method 初始化方法
+    // destroy-method 销毁方法
+    // spring ioc容器会在对应的时间点调用对应的方法-->
+    <bean id = "beanOne" class="ioc_04.BeanOne" init-method="init" destroy-method="cleanup"/>
+
+    <!--bean的作用域
+    准备两个引用关系的组件类即可！！
+-->
+    <!-- scope属性：取值singleton（默认值），bean在IOC容器中只有一个实例，IOC容器初始化时创建对象 -->
+    <!-- scope属性：取值prototype，bean在IOC容器中可以有多个实例，getBean()时创建对象 -->
+    <bean id="beanTwo" class="ioc_04.BeanTwo" scope="singleton"/>
+    <bean id="beanTwo1" class="ioc_04.BeanTwo" scope="prototype"/>
+</beans>
